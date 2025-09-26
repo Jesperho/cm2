@@ -14,8 +14,11 @@ const createJob = async (req, res) => {
 
 
 const getAllJobs = async (req, res) => {
+    const limit = parseInt(req.query._limit);
     try {
-        const jobs = await jobModel.find({}).sort({ createdAt: -1 })
+        const jobs = limit
+            ? await jobModel.find({}).sort({ createdAt: -1 }).limit(limit)
+            : await jobModel.find({}).sort({ createdAt: -1 });
         res.status(200).json(jobs)
     } catch (error) {
         res.status(400).json({ message: "Error retrieving jobs" })
