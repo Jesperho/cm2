@@ -69,6 +69,22 @@ const deleteJob = async (req, res) => {
 }
 
 
+const getJob = async(req,res)=>{
+     const { jobId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(jobId)) {
+        return res.status(404).json({ message: "Invalid id" })
+    }
+
+    try {
+        const job = await jobModel.findById(jobId)
+        res.status(200).json(job)
+
+    } catch (error) {
+        res.status(400).json({ message: "Couldnt find job" })
+    }
+}
+
 
 
 
@@ -88,6 +104,7 @@ module.exports = {
     createJob,
     getAllJobs,
     updateJob,
-    deleteJob
+    deleteJob,
+    getJob
 
 }

@@ -7,7 +7,8 @@ const {
     createJob,
     getAllJobs,
     updateJob,
-    deleteJob
+    deleteJob,
+    getJob
 } = require("../controllers/jobControllers")
 
 
@@ -15,6 +16,7 @@ router.post("/", createJob)
 router.get("/", getAllJobs)
 router.patch("/:jobId", updateJob)
 router.delete("/:jobId", deleteJob)
+router.get("/:jobId", getJob)
 
 
 
