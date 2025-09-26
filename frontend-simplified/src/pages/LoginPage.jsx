@@ -6,8 +6,6 @@ const LoginPage = ({ setIsAuthenticated }) => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  
-
 
   const handleLogin = async () => {
     try {
@@ -34,7 +32,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
     <section className="bg-indigo-50 min-h-screen">
       <div className="container m-auto max-w-2xl py-24">
         <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-          <form onSubmit={submitForm}>
+          <form onSubmit={handleLogin}>
             <h2 className="text-3xl text-center font-semibold mb-6">Login</h2>
 
             <div className="mb-4">
@@ -74,7 +72,6 @@ const LoginPage = ({ setIsAuthenticated }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-
 
             <div className="mb-4">
               <button
