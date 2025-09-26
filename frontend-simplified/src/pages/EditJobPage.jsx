@@ -34,7 +34,7 @@ const EditJobPage = () => {
   const updateJob = async (job) => {
     try {
       const res = await fetch(`/api/jobs/${job.id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
