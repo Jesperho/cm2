@@ -11,8 +11,9 @@ const jobSchema = new mongoose.Schema({
     description: { type: String, required: true },
     contactEmail: { type: String, required: true },
     contactPhone: { type: String, required: true }
-  }
-});
+  }, 
+}, {timestamps: true}
+);
 
 // Ensure virtual fields are serialized
 jobSchema.set('toJSON', {

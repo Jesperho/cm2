@@ -31,7 +31,7 @@ const userSchema = new Schema(
     },
     membership_status: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true, versionKey: false  }

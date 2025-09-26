@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 // const userRouter = require("./routes/userRouter");
+const jobRouter = require("./routes/jobRouter")
+const userRoutes = require("./routes/userRouter");
 const { unknownEndpoint,errorHandler } = require("./middleware/customMiddleware");
 const connectDB = require("./config/db");
 const cors = require("cors");
@@ -17,6 +19,9 @@ connectDB();
 // Use the userRouter for all /users routes
 // app.use("/api/users", userRouter);
 
+app.use("/api/jobs", jobRouter)
+app.use("/api/users", userRoutes);
+
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
@@ -25,3 +30,6 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+
+
