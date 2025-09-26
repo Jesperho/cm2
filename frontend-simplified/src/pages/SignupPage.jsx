@@ -10,71 +10,48 @@ const SignupPage = ({ SignupSubmit }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [membershipStatus, setMembershipStatus] = useState("basic");
+  const [membershipStatus, setMembershipStatus] = useState("Basic");
 
   const navigate = useNavigate();
 
-  const submitForm = (e) => {
-    e.preventDefault;
+  const submitForm = async (e) => {
+    e.preventDefault();
 
-    //Password confirmation
+    // Password confirmation
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
 
-    const newUser = {
-      name,
-      email,
-      password,
-      phoneNumber,
-      gender,
-      dateOfBirth,
-      membershipStatus,
-    };
-
-    // Backend connection (Later)
-    if (SignupSubmit) {
-      SignupSubmit(newUser);
-    }
-
-    toast.success("Account created successfully");
-
-    return navigate("/login");
-  };
-
-  // Add New Job
-  // const addJob = async (newJob) => {
-  //   const res = await fetch("/api/jobs", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newJob),
-  //   });
-  //   return;
-  // };
-
-  /* const addJob = async (newJob) => {
     try {
-      const res = await fetch("/api/jobs", {
+      const response = await fetch("/api/users/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newJob),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          phoneNumber,
+          gender,
+          dateOfBirth,
+          membershipStatus,
+        }),
       });
-      if (!res.ok) {
-        throw new Error("Failed to add job");
+
+      if (response.ok) {
+        const userData = await response.json();
+        localStorage.setItem("user", JSON.stringify(userData));
+        toast.success("Account Created Successfully");
+        navigate("/login");
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message || "Signup failed");
       }
     } catch (error) {
-      console.error(error);
-      toast.error("An error occurred while adding the job.");
-      return false;
+      console.error("Error during signup:", error);
+      toast.error("Network error occurred");
     }
-    return true;
   };
- */
 
   return (
     <section className="bg-indigo-50 min-h-screen">
@@ -266,4 +243,5 @@ const SignupPage = ({ SignupSubmit }) => {
     </section>
   );
 };
+
 export default SignupPage;
