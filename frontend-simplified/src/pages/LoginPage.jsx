@@ -7,7 +7,8 @@ const LoginPage = ({ setIsAuthenticated }) => {
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch("api/users/login", {
         method: "POST",
@@ -19,7 +20,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
         const user = await response.json();
         localStorage.setItem("user", JSON.stringify(user));
         setIsAuthenticated(true);
-        navigate("/login");
+        navigate("/");
       } else {
         console.error("Login failed");
       }

@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import { useState } from "react";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import JobsPage from "./pages/JobsPage";
@@ -15,6 +16,9 @@ import SignUpPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("user") || false
+  );
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
@@ -24,7 +28,10 @@ const App = () => {
         <Route path="/edit-job/:id" element={<EditJobPage />} />
         <Route path="/jobs/:id" element={<JobPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
