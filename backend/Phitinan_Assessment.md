@@ -1,5 +1,5 @@
-#Self-Assessment: User Authentication Routes
-###Example 1: Implementing Signup and Login Functionality
+# Self-Assessment: User Authentication Routes
+### Example 1: Implementing Signup and Login Functionality
 
 Initially, backend did not have authentication endpoints set up.
 
@@ -61,7 +61,7 @@ Input Validation: Ensured all fields are provided and valid (email, password str
 Security: Passwords are hashed using bcrypt before storing in the database.
 JWT Authentication: Users receive a token upon signup/login, enabling authenticated requests to protected routes.
 
-###Example 2: Integrating User Routes in app.js
+### Example 2: Integrating User Routes in app.js
 
 Initially, the main app.js did not include user routes which caused /api/users endpoints to be inaccessible.
 
@@ -78,7 +78,7 @@ Middleware Order Matters: Adding express.json(), cors(), and morgan() before rou
 Scalable Structure: Separating controllers, routes, and middleware improves readability and maintainability of the backend.
 
 
-My contributuions:
+### My contributuions:
 userControllers.js
 userRouter.js
 app.js //userRouter part
