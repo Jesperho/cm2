@@ -69,7 +69,7 @@ Solution: I imported userRouter.js and connected it under /api/users:
 
 
 
-Lessons Learned:
+### Lessons Learned:
 
 Router Integration: Explicitly connecting routers in app.js is required to make endpoints accessible.
 
@@ -79,7 +79,11 @@ Scalable Structure: Separating controllers, routes, and middleware improves read
 
 
 ### My contributuions:
+
 userControllers.js
+
 userRouter.js
+
 app.js //userRouter part
+
 Minor help in deploying backend
