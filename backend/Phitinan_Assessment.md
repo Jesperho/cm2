@@ -1,5 +1,5 @@
-Self-Assessment: User Authentication Routes
-Example 1: Implementing Signup and Login Functionality
+#Self-Assessment: User Authentication Routes
+###Example 1: Implementing Signup and Login Functionality
 
 Initially, backend did not have authentication endpoints set up.
 
@@ -22,9 +22,7 @@ POST http://localhost:4000/api/users/login with email and password
 However, there were improvements needed:
 
 Input validation was missing in the original draft.
-
 Passwords were not hashed before storing, which was insecure.
-
 JWT tokens were not implemented, so there was no way to authenticate requests.
 
 To address these issues, I implemented userControllers.js with validation, password hashing, and JWT token generation:
@@ -60,29 +58,15 @@ const signupUser = async (req, res) => {
 Key Improvements:
 
 Input Validation: Ensured all fields are provided and valid (email, password strength).
-
 Security: Passwords are hashed using bcrypt before storing in the database.
-
 JWT Authentication: Users receive a token upon signup/login, enabling authenticated requests to protected routes.
 
-Example 2: Integrating User Routes in app.js
+###Example 2: Integrating User Routes in app.js
 
-Initially, the main app.js did not include user routes. Only job routes were connected:
+Initially, the main app.js did not include user routes which caused /api/users endpoints to be inaccessible.
 
-// Initial setup in app.js
-app.use("/api/jobs", jobRouter);
+Solution: I imported userRouter.js and connected it under /api/users:
 
-
-This caused /api/users endpoints to be inaccessible.
-
-Solution:
-
-We imported userRouter.js and connected it under /api/users:
-
-// Updated setup in app.js
-const userRoutes = require("./routes/userRouter");
-
-app.use("/api/users", userRoutes);
 
 
 Lessons Learned:
@@ -92,3 +76,10 @@ Router Integration: Explicitly connecting routers in app.js is required to make 
 Middleware Order Matters: Adding express.json(), cors(), and morgan() before routers ensures requests are parsed, logged, and CORS-compliant.
 
 Scalable Structure: Separating controllers, routes, and middleware improves readability and maintainability of the backend.
+
+
+My contributuions:
+userControllers.js
+userRouter.js
+app.js //userRouter part
+Minor help in deploying backend
