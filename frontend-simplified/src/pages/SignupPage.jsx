@@ -7,10 +7,10 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [membershipStatus, setMembershipStatus] = useState("Basic");
+  const [date_of_birth, setDateOfBirth] = useState("");
+  const [membership_status, setMembershipStatus] = useState("Basic");
 
   const navigate = useNavigate();
 
@@ -31,10 +31,10 @@ const SignupPage = () => {
           name,
           email,
           password,
-          phoneNumber,
+          phone_number,
           gender,
-          dateOfBirth,
-          membershipStatus,
+          date_of_birth,
+          membership_status,
         }),
       });
 
@@ -150,7 +150,7 @@ const SignupPage = () => {
                 className="border rounded w-full py-2 px-3"
                 placeholder="Enter your phone number"
                 required
-                value={phoneNumber}
+                value={phone_number}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
@@ -191,7 +191,7 @@ const SignupPage = () => {
                 name="dateOfBirth"
                 className="border rounded w-full py-2 px-3"
                 required
-                value={dateOfBirth}
+                value={date_of_birth}
                 onChange={(e) => setDateOfBirth(e.target.value)}
               />
             </div>
@@ -208,7 +208,7 @@ const SignupPage = () => {
                 name="membershipStatus"
                 className="border rounded w-full py-2 px-3"
                 required
-                value={membershipStatus}
+                value={membership_status}
                 onChange={(e) => setMembershipStatus(e.target.value)}
               >
                 <option value="Basic">Basic</option>
