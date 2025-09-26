@@ -1,39 +1,46 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
 
 const LoginPage = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, error } = useLogin(setIsAuthenticated);
 
-  const navigate = useNavigate();
-
-  const handleLogin = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const user = await response.json();
-        localStorage.setItem("user", JSON.stringify(user));
-        setIsAuthenticated(true);
-        navigate("/");
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-    }
+    login(email, password);
   };
+
+  //   const navigate = useNavigate();
+
+  //   const handleLogin = async (e) => {
+  //     e.preventDefault();
+  //     try {
+  //       const response = await fetch("api/users/login", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ email, password }),
+  //       });
+
+  //       if (response.ok) {
+  //         const user = await response.json();
+  //         localStorage.setItem("user", JSON.stringify(user));
+  //         setIsAuthenticated(true);
+  //         navigate("/");
+  //       } else {
+  //         console.error("Login failed");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error during login:", error);
+  //     }
+  //   };
 
   return (
     <section className="bg-indigo-50 min-h-screen">
       <div className="container m-auto max-w-2xl py-24">
         <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-3xl text-center font-semibold mb-6">Login</h2>
 
             <div className="mb-4">
@@ -78,7 +85,6 @@ const LoginPage = ({ setIsAuthenticated }) => {
               <button
                 className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                 type="submit"
-                onClick={handleLogin}
               >
                 Log In
               </button>
@@ -95,6 +101,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                 </a>
               </p>
             </div>
+            {error && <div className="error">{error}</div>}
           </form>
         </div>
       </div>

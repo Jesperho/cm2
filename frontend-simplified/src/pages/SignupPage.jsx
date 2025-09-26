@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSignup } from "../hooks/useSignup";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,8 @@ const SignupPage = () => {
   const [date_of_birth, setDateOfBirth] = useState("");
   const [membership_status, setMembershipStatus] = useState("Basic");
 
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
+  const { signup, isLoading } = useSignup();
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -23,7 +25,20 @@ const SignupPage = () => {
       return;
     }
 
-    try {
+    const userData = {
+      name,
+      email,
+      password,
+      phone_number,
+      gender,
+      date_of_birth,
+      membership_status,
+    };
+
+    await signup(userData);
+  };
+
+  /*  try {
       const response = await fetch("/api/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,7 +66,7 @@ const SignupPage = () => {
       console.error("Error during signup:", error);
       toast.error("Network error occurred");
     }
-  };
+  }; */
 
   return (
     <section className="bg-indigo-50 min-h-screen">
