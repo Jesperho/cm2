@@ -44,7 +44,7 @@ const updateJob = async (req, res) => {
         if (updatedJob) {
             res.status(200).json(updatedJob)
         } else {
-            res.status(400).json({ message: "Couldnt find the job" })
+            res.status(404).json({ message: "Couldnt find the job" })
         }
 
     } catch (error) {
