@@ -32,11 +32,13 @@ const EditJobPage = () => {
   // };
 
   const updateJob = async (job) => {
+     const token = JSON.parse(localStorage.getItem("user"));
     try {
       const res = await fetch(`/api/jobs/${job.id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(job),
       });

@@ -21,12 +21,12 @@ const App = () => {
   );
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
+      <Route path="/" element={<MainLayout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}>
+        <Route index element={<HomePage isAuthenticated={isAuthenticated}/>} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/add-job" element={<AddJobPage />} />
         <Route path="/edit-job/:id" element={<EditJobPage />} />
-        <Route path="/jobs/:id" element={<JobPage />} />
+        <Route path="/jobs/:id" element={<JobPage isAuthenticated={isAuthenticated}  />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route
           path="/login"
